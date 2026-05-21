@@ -413,16 +413,27 @@ nav.top{position:sticky;top:0;z-index:200;background:rgba(8,18,29,.97);backdrop-
   .dh-image { 
     width: 100% !important; 
     max-width: 100% !important; 
-    margin: 0 !important; 
+    margin: 0 auto !important; 
     border-radius: 8px;
     aspect-ratio: 4/3 !important;
+    box-sizing: border-box !important;
   }
   .dh-image img { 
     width: 100% !important; 
     height: 100% !important; 
     object-fit: cover !important; 
+    object-position: center center !important;
     display: block !important;
   }
+  /* Lock carousel UI to image bounds — no poke-out */
+  .dh-carousel-prev { left: 8px !important; }
+  .dh-carousel-next { right: 8px !important; }
+  .dh-badge { top: 10px !important; left: 10px !important; font-size: 9px !important; padding: 5px 9px !important; }
+  .dh-3d { top: 10px !important; right: 10px !important; font-size: 9px !important; padding: 6px 10px !important; }
+  .dh-carousel-counter { bottom: 8px !important; right: 8px !important; font-size: 10px !important; padding: 3px 7px !important; }
+  /* Kill ANY horizontal overflow */
+  html, body { overflow-x: hidden !important; }
+  .detail-hero, .d-section { overflow-x: hidden !important; }
   /* Make sure carousel arrows don't poke out */
   .dh-carousel-nav { z-index: 5; }
   .dh-badge, .dh-3d { z-index: 4; }
@@ -492,6 +503,73 @@ nav.top{position:sticky;top:0;z-index:200;background:rgba(8,18,29,.97);backdrop-
   .dh-info h1, #d-name { font-size: 18px !important; }
   .dh-price { font-size: 22px !important; }
   .d-section h2 { font-size: 17px !important; }
+}
+
+
+/* ─── BUILDING FEATURES DROPDOWN (mobile-friendly accordion) ─── */
+.dh-features-dropdown{
+  margin:20px 0 0;background:var(--dark-2);border:1px solid var(--border-vis);
+  border-radius:6px;overflow:hidden;
+}
+.dh-features-dropdown summary{
+  list-style:none;cursor:pointer;padding:16px 18px;display:flex;
+  align-items:center;justify-content:space-between;gap:12px;
+  font-family:var(--h);font-weight:700;font-size:12px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--text);
+  transition:background .2s;
+}
+.dh-features-dropdown summary::-webkit-details-marker{display:none}
+.dh-features-dropdown summary::marker{display:none;content:""}
+.dh-features-dropdown summary:hover{background:rgba(34,211,200,.04)}
+.dh-features-dropdown summary .dh-feat-title-icon{
+  width:18px;height:18px;color:var(--teal);flex-shrink:0;
+}
+.dh-features-dropdown summary .dh-feat-title-text{
+  flex:1;
+}
+.dh-features-dropdown summary .dh-feat-arrow{
+  width:14px;height:14px;color:var(--teal);
+  transition:transform .25s;flex-shrink:0;
+}
+.dh-features-dropdown[open] summary .dh-feat-arrow{transform:rotate(180deg)}
+.dh-features-dropdown[open] summary{border-bottom:1px solid var(--border-vis)}
+.dh-feat-body{padding:14px 18px 18px}
+.dh-feat-quickrow{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:10px 16px;margin-bottom:14px;
+  padding-bottom:14px;border-bottom:1px solid var(--border);
+}
+.dh-feat-quickrow .qr-item{display:flex;flex-direction:column;gap:2px}
+.dh-feat-quickrow .qr-label{
+  font-family:var(--h);font-size:9px;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);
+}
+.dh-feat-quickrow .qr-value{
+  font-size:13px;font-weight:600;color:var(--text);line-height:1.3;
+}
+.dh-feat-list-title{
+  font-family:var(--h);font-size:10px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--teal);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.dh-feat-list-title::before{content:"";width:18px;height:1px;background:var(--teal)}
+.dh-feat-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.dh-feat-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:var(--text);line-height:1.45;
+}
+.dh-feat-list li::before{
+  content:"";width:6px;height:6px;background:var(--teal);
+  border-radius:50%;flex-shrink:0;margin-top:8px;
+}
+
+/* On desktop, hide the dropdown (use the original specs grid layout) */
+@media(min-width:768px){
+  .dh-features-dropdown{display:none}
+}
+/* On mobile, hide the old specs grid */
+@media(max-width:767px){
+  .dh-specs{display:none !important}
 }
 
 </style>
@@ -603,6 +681,24 @@ window.addEventListener('load', function(){
           </div>
         </div>
       </div>
+      <!-- Building Features Dropdown (mobile-only) -->
+      <details class="dh-features-dropdown" id="d-features-dropdown">
+        <summary>
+          <svg class="dh-feat-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18M3 15h18M9 3v18M15 3v18"/></svg>
+          <span class="dh-feat-title-text">Building Features</span>
+          <svg class="dh-feat-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="dh-feat-body">
+          <div class="dh-feat-quickrow">
+            <div class="qr-item"><div class="qr-label">Use</div><div class="qr-value" id="qr-use">—</div></div>
+            <div class="qr-item"><div class="qr-label">Size</div><div class="qr-value" id="qr-size">—</div></div>
+            <div class="qr-item"><div class="qr-label">Roof</div><div class="qr-value" id="qr-roof">—</div></div>
+            <div class="qr-item"><div class="qr-label">Walls</div><div class="qr-value" id="qr-wall">—</div></div>
+          </div>
+          <div class="dh-feat-list-title">Included Doors, Windows &amp; Features</div>
+          <ul class="dh-feat-list" id="qr-list"></ul>
+        </div>
+      </details>
       <div class="dh-specs">
         <div class="dh-specs-title">At a Glance</div>
         <div class="d-features-grid">
@@ -1283,6 +1379,30 @@ function loadBuilding(){
   document.getElementById('f-size').textContent = b.dims;
   document.getElementById('f-roof').textContent = b.roof;
   document.getElementById('f-wall').textContent = b.wall;
+  
+  // Populate the mobile "Building Features" dropdown
+  var qrUse = document.getElementById('qr-use'); if(qrUse) qrUse.textContent = b.use || '—';
+  var qrSize = document.getElementById('qr-size'); if(qrSize) qrSize.textContent = b.dims || '—';
+  var qrRoof = document.getElementById('qr-roof'); if(qrRoof) qrRoof.textContent = b.roof || '—';
+  var qrWall = document.getElementById('qr-wall'); if(qrWall) qrWall.textContent = b.wall || '—';
+  var qrList = document.getElementById('qr-list');
+  if(qrList){
+    qrList.innerHTML = '';
+    var features = (b.config || []).slice();
+    if(b.rollup && String(b.rollup) !== '0'){
+      var hasRollup = features.some(function(f){ return /roll[- ]?up/i.test(f); });
+      if(!hasRollup) features.unshift(b.rollup + ' Roll-Up Door' + (String(b.rollup) === '1' ? '' : 's'));
+    }
+    if(b.walk && String(b.walk) !== '0'){
+      var hasWalk = features.some(function(f){ return /walk/i.test(f); });
+      if(!hasWalk) features.push(b.walk + ' Walk-Through Door' + (String(b.walk) === '1' ? '' : 's'));
+    }
+    features.forEach(function(f){
+      var li = document.createElement('li');
+      li.textContent = f;
+      qrList.appendChild(li);
+    });
+  }
   // Swap wall icon if horizontal
   var wallIcon = document.getElementById('f-wall-icon');
   var isHorizontal = b.wall && b.wall.toLowerCase().indexOf('horizontal') !== -1;
