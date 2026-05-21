@@ -1500,21 +1500,8 @@ function cardClick(e, card){
   if(card.classList.contains('quote-open')) return;
   const href = card.dataset.href;
   if(href){
-    // Scroll to top BEFORE navigating so the detail page starts at top
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    if(document.body) document.body.scrollTop = 0;
-    // Also scroll parent (Wix) to top of iframe
-    if(window.parent && window.parent !== window){
-      try { window.parent.scrollTo(0, 0); } catch(e2){}
-      try {
-        var frames = window.parent.document.querySelectorAll('iframe');
-        for(var i=0;i<frames.length;i++){
-          try { if(frames[i].contentWindow===window) frames[i].scrollIntoView({behavior:'auto',block:'start'}); } catch(e3){}
-        }
-      } catch(e2){}
-    }
-    window.location.href = href;
+    // Open detail page in a new tab — sidesteps Wix iframe sizing issues
+    window.open(href, '_blank', 'noopener');
   }
 }
 function cardKey(e, card){

@@ -624,7 +624,7 @@ window.addEventListener('load', function(){
 
 <!-- BREADCRUMB -->
 <div class="breadcrumb">
-  <a href="./">Buildings</a>
+  <a href="./" onclick="if(window.opener){window.close();return false;}return true;">← Back to Buildings</a>
   <span class="sep">/</span>
   <span id="bc-current">Loading…</span>
 </div>
@@ -1457,7 +1457,7 @@ function loadBuilding(){
   const grid = document.getElementById('d-related-grid');
   grid.innerHTML = (b.related || []).map(id => {
     const r = BUILDINGS[id]; if(!r) return '';
-    return `<a href="#${id}" class="d-rel-card">
+    return `<a href="building-details.html#${id}" target="_blank" rel="noopener" class="d-rel-card">
       <div class="d-rel-img"><img src="${r.image}" alt="${r.name}" loading="lazy"></div>
       <div class="d-rel-body">
         <div class="d-rel-dim">${r.dims}</div>
