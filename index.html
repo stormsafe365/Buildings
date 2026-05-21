@@ -2580,6 +2580,17 @@ document.addEventListener('click', function(e){
 // ─── DOM POPULATOR (from former detail page) ───
 // DEFAULT_SLUG already defined above
 
+const STD_INCLUDES = [
+  'FREE Delivery to Your Building Site',
+  'FREE Professional Installation on a Prepared Pad',
+  'Engineered to Meet Local Wind & Snow Load Requirements',
+  '20-Year Rust-Through Warranty on Roof & Wall Panels',
+  '1-Year Workmanship Warranty',
+  '26-Gauge Roofing + 14-Gauge 2½″ Framing',
+  'Cement & Mobile-Home Anchors Included',
+  'Hurricane Bracing Available — Required in Coastal Zones',
+];
+
 function loadBuildingIntoModal(slug){
   const hash = slug;
   const b = BUILDINGS[hash];
@@ -2601,7 +2612,8 @@ function loadBuildingIntoModal(slug){
   if(bmTitle) bmTitle.textContent = b.dims + ' ' + shortName;
   document.title = b.name + ' — StormSafe Steel';
   var shortDesc = b.description.length > 158 ? b.description.slice(0,155)+'…' : b.description;
-  document.getElementById('page-desc').setAttribute('content', shortDesc);
+  var pageDesc = document.getElementById('page-desc');
+  if(pageDesc) pageDesc.setAttribute('content', shortDesc);
   
   // ─── SEO: canonical + OG + Twitter + Schema (all credit → stormsafesteel.com)
   // Wrapped in try/catch so missing elements never break rendering
@@ -2792,14 +2804,8 @@ function submitQuote(){
 }
 
 // ─── LOAD & ROUTE ───
-window.addEventListener('hashchange', () => { 
-  _savedSlug = location.hash ? location.hash.slice(1) : '';
-  loadBuilding(); 
-  window.scrollTo(0, 0); 
-  document.documentElement.scrollTop = 0;
-  document.body.scrollTop = 0;
-});
-loadBuilding();
+// Hash changes are handled by the modal's auto-open logic at the end of script
+// (No need for loadBuilding() on initial script run — modal opens on demand)
 
 // ESC closes modal
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeQuote(); });
