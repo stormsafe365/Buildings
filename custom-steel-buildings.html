@@ -191,7 +191,7 @@ footer{background:var(--dark-2);border-top:1px solid var(--border-vis);padding:4
 .chip{background:none;border:1px solid var(--border-vis);color:var(--sub);font-family:var(--h);font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;border-radius:999px;cursor:pointer}
 .chip[aria-pressed="true"]{border-color:var(--teal);color:var(--teal);background:var(--teal-glow)}
 .chip small{color:var(--muted);margin-left:4px}
-.grid{display:grid;gap:16px}
+.grid{display:grid;gap:16px;align-content:start}
 @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
 .card{background:var(--dark-2);border:1px solid var(--border-vis);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s,transform .25s}
@@ -249,6 +249,7 @@ footer{background:var(--dark-2);border-top:1px solid var(--border-vis);padding:4
 
 /* Wix embed */
 body{padding-bottom:0!important}
+#grid{align-content:start}
 .faq summary,.c-faq summary{pointer-events:none;cursor:default}
 .faq summary::after,.c-faq summary::after{display:none}
 </style>
@@ -541,6 +542,9 @@ var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -50px 0px'});
   els.forEach(function(e){io.observe(e);});})();
 </script>
-<script>(function(){var g=document.getElementById('grid');if(!g)return;function lock(){g.style.minHeight='';g.style.minHeight=g.offsetHeight+'px';}addEventListener('load',lock);})();</script>
+<script>(function(){var g=document.getElementById('grid');if(!g)return;var t;
+function lock(){var hid=[].slice.call(g.children).filter(function(c){return c.hidden;});hid.forEach(function(c){c.hidden=false;});
+g.style.minHeight='';var hgt=g.offsetHeight;hid.forEach(function(c){c.hidden=true;});g.style.minHeight=hgt+'px';}
+addEventListener('load',lock);addEventListener('resize',function(){clearTimeout(t);t=setTimeout(lock,120);});})();</script>
 </body>
 </html>
