@@ -154,17 +154,18 @@ footer{background:var(--dark-2);border-top:1px solid var(--border-vis);padding:4
 .bp-cap b{color:var(--sub);font-weight:600}
 /* explorer */
 .ex{background:var(--dark-2);border-top:1px solid var(--border-vis);border-bottom:1px solid var(--border-vis)}
-.tabs{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 14px;margin-bottom:22px;scrollbar-width:thin}
+.tabs{display:flex;gap:8px;overflow-x:auto;max-width:100%;padding:2px 2px 14px;margin-bottom:22px;scrollbar-width:thin}
 .tab{flex:none;background:var(--dark);border:1px solid var(--border-vis);color:var(--sub);font-family:var(--h);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;border-radius:999px;cursor:pointer;transition:all .2s}
 .tab:hover{border-color:var(--lime);color:var(--text)}
 .tab[aria-selected="true"]{background:var(--lime);border-color:var(--lime);color:#08121d}
-.panel{display:grid;gap:26px;align-items:start}
+.panel{display:grid;gap:26px;align-items:start;grid-template-columns:minmax(0,1fr)}
+.panel>*{min-width:0}
 @media(min-width:960px){#p-body{min-height:560px}}
-@media(min-width:960px){.panel{grid-template-columns:1.15fr .85fr;gap:40px}}
+@media(min-width:960px){.panel{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:40px}}
 .shot{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border-vis);background:var(--dark-3);aspect-ratio:4/3}
 .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:opacity .35s}
 .thumbs{display:flex;gap:8px;margin-top:10px}
-.thumbs button{width:72px;height:54px;border-radius:8px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:none;opacity:.6}
+.thumbs button{flex:0 1 72px;min-width:0;height:54px;border-radius:8px;overflow:hidden;border:2px solid transparent;padding:0;cursor:pointer;background:none;opacity:.6}
 .thumbs button[aria-pressed="true"]{border-color:var(--lime);opacity:1}
 .thumbs img{width:100%;height:100%;object-fit:cover;display:block}
 .p-name{font-family:var(--h);font-weight:800;font-size:clamp(20px,3vw,28px);text-transform:uppercase;line-height:1.15;margin:6px 0 6px}
