@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Photo of this build coming soon">
+  <defs>
+    <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1a2f45" stroke-width="1"/></pattern>
+    <radialGradient id="r" cx="50%" cy="38%" r="60%"><stop offset="0" stop-color="#22d3c8" stop-opacity=".12"/><stop offset="1" stop-color="#22d3c8" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="#0c1a27"/>
+  <rect width="800" height="600" fill="url(#g)"/>
+  <rect width="800" height="600" fill="url(#r)"/>
+  <g fill="none" stroke="#22d3c8" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M250 330 L400 250 L550 330"/>
+    <path d="M280 316 V420 H520 V316"/>
+    <path d="M550 330 L640 360 V420 H520"/>
+    <path d="M250 330 L160 360 V420 H280"/>
+    <rect x="335" y="345" width="130" height="75"/>
+    <path d="M335 365 H465 M335 385 H465 M335 405 H465" stroke-width="2.5" opacity=".6"/>
+    <path d="M600 372 V420 M200 372 V420" stroke-width="3"/>
+  </g>
+  <text x="400" y="480" text-anchor="middle" fill="#e2e8f0" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" letter-spacing="5">PHOTO COMING SOON</text>
+  <text x="400" y="516" text-anchor="middle" fill="#94a3b8" font-family="Arial, Helvetica, sans-serif" font-size="19">Free 3D rendering of this build with every quote</text>
+</svg>
